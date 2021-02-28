@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import {Dropdown, Input} from './Input'
+import { BASE_URL } from '../data/env';
 
 const Company = () => {
     const [name, setName] = useState()
@@ -23,7 +24,7 @@ const Company = () => {
             postHeaders.append("Authorization",localStorage.getItem("token"))
             postHeaders.append("Content-Type","application/json")
 
-            const response = await fetch("http://python.alphas9.com/get/company", {
+            const response = await fetch(`${BASE_URL}/get/company`, {
                 method: 'GET',
                 headers: postHeaders,
                 redirect: "follow"
@@ -41,7 +42,7 @@ const Company = () => {
                 postHeaders.append("Content-Type","application/json")
                 postHeaders.append("Authorization",localStorage.getItem("token"))
 
-                const response = await fetch(`http://python.alphas9.com/get/template`,{
+                const response = await fetch(`${BASE_URL}/get/template`,{
                     method: 'GET',
                     headers: postHeaders,
                 })
@@ -62,7 +63,7 @@ const Company = () => {
                 postHeaders.append("Content-Type","application/json")
                 postHeaders.append("Authorization",localStorage.getItem("token"))
 
-                const response = await fetch(`http://python.alphas9.com/get/account`, {
+                const response = await fetch(`${BASE_URL}/get/account`, {
                     method: 'GET',
                     headers: postHeaders,
                 })
@@ -95,7 +96,7 @@ const Company = () => {
             "modifiedby": "admin",
         }
 
-        fetch(`http://python.alphas9.com/create/company`, {
+        fetch(`${BASE_URL}/create/company`, {
             method: 'POST',
             headers: postHeaders,
             body: JSON.stringify(sectionData),
