@@ -90,7 +90,7 @@ const Banner = ({data}) => {
                         "paragraph": JSON.stringify([description])
                     }
 
-                    fetch(`${BASE_URL}/update/all/3/${id}/`, {
+                    fetch(`${BASE_URL}/update/all/${window.location.pathname.split("/")[1]}/${id}/`, {
                         headers: postHeaders,
                         method: "POST",
                         body: JSON.stringify(sectionData),
@@ -121,7 +121,7 @@ const Banner = ({data}) => {
                         "paragraph": JSON.stringify([description])
                     }
 
-                    fetch(`${BASE_URL}/update/all/3/${id}/`, {
+                    fetch(`${BASE_URL}/update/all/${window.location.pathname.split("/")[1]}/${id}/`, {
                         headers: postHeaders,
                         method: "POST",
                         body: JSON.stringify(sectionData),
@@ -140,7 +140,7 @@ const Banner = ({data}) => {
                     "paragraph": JSON.stringify([description])
                 }
 
-                fetch(`${BASE_URL}/update/all/3/${id}/`, {
+                fetch(`${BASE_URL}/update/all/${window.location.pathname.split("/")[1]}/${id}/`, {
                     headers: postHeaders,
                     method: "POST",
                     body: JSON.stringify(sectionData),
