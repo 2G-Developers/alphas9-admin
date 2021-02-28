@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import SideDrawer from "./components/SideDrawer";
+import { BASE_URL } from './data/env';
 
 const About = React.lazy(() => import('./pages/About'));
 const Banner = React.lazy(() => import('./pages/Banner'));
@@ -27,7 +28,7 @@ function App() {
         let comID = window.location.pathname.split("/")
         setCompanyID(comID[1])
         try {
-          const response = await fetch(`http://python.alphas9.com/get/company/${comID[1]}`)
+          const response = await fetch(`${BASE_URL}/get/company/${comID[1]}`)
           const payload = await response.json()
           if(Object.keys(payload).length) {
             setData(payload)

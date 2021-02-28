@@ -1,5 +1,6 @@
 import React,{useEffect} from 'react'
 import {AiOutlinePlus} from 'react-icons/ai'
+import { BASE_URL } from '../data/env'
 
 export const TextArea = ({value, setValue}) => {
     return (
@@ -113,7 +114,7 @@ export const MultipleImageUpload = ({file, setFile, filepath}) => {
         <>
             {filepath? <div className="card">
                 {
-                    filepath.map((item, idx) => <img key={idx} src={`http://python.alphas9.com/${item}`} alt="User"/>)
+                    filepath.map((item, idx) => <img key={idx} src={`${BASE_URL}/${item}`} alt="User"/>)
                 }
             </div> : null }
             <label style={{width: "100%"}}>
