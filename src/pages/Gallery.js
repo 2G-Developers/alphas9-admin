@@ -23,8 +23,12 @@ const Gallery = ({data}) => {
         postHeaders.append("Content-Type","application/json")
         postHeaders.append("Authorization",localStorage.getItem("token"))
 
+        const imageHeaders = new Headers()
+        imageHeaders.append("authorization",localStorage.getItem("token"))
+
         if(file) {
             fetch(`${BASE_URL}/uploader_multi/alphas9`, {
+                headers: imageHeaders,
                 method: "POST",
                 body: imageData,
                 redirect: "follow"
@@ -35,7 +39,6 @@ const Gallery = ({data}) => {
                 }
             })
             .then(data => {
-                console.log("Uploader",data)
                 setFilePath(data.desc)
                 setFile("")
 

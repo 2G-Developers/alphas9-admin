@@ -26,22 +26,26 @@ const Banner = ({data}) => {
         postHeaders.append("Content-Type","application/json")
         postHeaders.append("Authorization",localStorage.getItem("token"))
 
+        const imageHeaders = new Headers()
+        imageHeaders.append("authorization",localStorage.getItem("token"))
+
         if(file && founderFile) {
             Promise.all([
                 fetch(`${BASE_URL}/uploader/alphas9`, {
+                    headers: imageHeaders,
                     method: "POST",
                     body: imageData,
                     redirect: "follow"
                 })
                 .then(res => res.json()),
                 fetch(`${BASE_URL}/uploader/alphas9`, {
+                    headers: imageHeaders,
                     method: "POST",
                     body: FounderData,
                     redirect: "follow"
                 })
                 .then(res => res.json())
             ]).then(([bgImageRes, founderImageRes]) => {
-                console.log(bgImageRes, founderImageRes)
                 setFilePath(`${BASE_URL}/${bgImageRes.desc}`)
                 setFounderFilePath(`${BASE_URL}/${founderImageRes.desc}`)
                 setFile("")
@@ -76,6 +80,7 @@ const Banner = ({data}) => {
         } else {
             if(file) {
                 fetch(`${BASE_URL}/uploader/alphas9`, {
+                    headers: imageHeaders,
                     method: "POST",
                     body: imageData,
                     redirect: "follow"
@@ -112,6 +117,7 @@ const Banner = ({data}) => {
                 })
             } else if(founderFile) {
                 fetch(`${BASE_URL}/uploader/alphas9`, {
+                    headers: imageHeaders,
                     method: "POST",
                     body: FounderData,
                     redirect: "follow"

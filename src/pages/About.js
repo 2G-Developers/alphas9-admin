@@ -24,9 +24,13 @@ const About = ({data}) => {
         postHeaders.append("Content-Type","application/json")
         postHeaders.append("authorization",localStorage.getItem("token"))
 
+        const imageHeaders = new Headers()
+        imageHeaders.append("authorization",localStorage.getItem("token"))
+
         if(file) {
             fetch(`${BASE_URL}/uploader/alphas9`, {
                 method: "POST",
+                headers: imageHeaders,
                 body: imageData,
                 redirect: "follow"
             })
