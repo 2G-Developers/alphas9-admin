@@ -13,6 +13,7 @@ const About = ({data}) => {
     const [description, setDescription] = useState(data?.value?.paragraph[0])
     const [listvalue, setListvalue] = useState("")
     const [list, setList] = useState(data?.value?.list)
+    const [ready, setReady] = useState(false)
 
     const saveHandler = () => {
         const imageData = new FormData();
@@ -54,7 +55,12 @@ const About = ({data}) => {
                     body: JSON.stringify(sectionData),
                     redirect: "follow"
                 }).then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    setReady(true)
+                    setTimeout(function(){
+                        setReady(false)
+                    }, 3000)
+                })
             })
         } else {
             const sectionData = {
@@ -72,7 +78,12 @@ const About = ({data}) => {
                 redirect: "follow"
             })
             .then(res => res.json())
-            .then(data => console.log("Else",data))
+            .then(data => {
+                setReady(true)
+                setTimeout(function(){
+                    setReady(false)
+                }, 3000)
+            })
         }
         
     }
@@ -115,6 +126,9 @@ const About = ({data}) => {
                     <div className="about__cta">
                         <button className="btn btn--primary" onClick={saveHandler}>Save</button>
                         <DangerButton>Cancel</DangerButton>
+                    </div>
+                    <div className="about__success" style={{opacity: `${ready? "1": "0"}`}}>
+                        <p>Updated Successfully</p>
                     </div>
                 </div>
             </div>

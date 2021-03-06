@@ -10,6 +10,7 @@ const SocialMedia = ({data}) => {
     const [twitter, setTwitter] = useState(data?.value?.twitter[0])
     const [linkedin, setLinkedin] = useState(data?.value?.linkdin[0])
     const [youtube, setYoutube] = useState(data?.value?.youtube[0])
+    const [ready, setReady] = useState(false)
 
     const saveHandler = () => {
     
@@ -32,7 +33,12 @@ const SocialMedia = ({data}) => {
             redirect: "follow"
         })
         .then(res => res.json())
-        .then(data => console.log("Else",data))
+        .then(data => {
+            setReady(true)
+            setTimeout(function(){
+                setReady(false)
+            }, 3000)
+        })
         
     }
 
@@ -59,6 +65,9 @@ const SocialMedia = ({data}) => {
                     <div className="about__cta">
                         <button className="btn btn--primary" onClick={saveHandler}>Save</button>
                         <DangerButton>Cancel</DangerButton>
+                    </div>
+                    <div className="about__success" style={{opacity: `${ready? "1": "0"}`}}>
+                        <p>Updated Successfully</p>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,7 @@ const Payments = ({data}) => {
     const [AccName, setAccName] = useState(data?.value?.account[0]?.AccountHOLDERNAME)
     const [AccNumber, setAccNumber] = useState(data?.value?.account[0]?.AccountNumber)
     const [ifsc, setIfsc] = useState(data?.value?.account[0]?.IFSCCode)
+    const [ready, setReady] = useState(false)
 
     const saveHandler = () => {
         const postHeaders = new Headers()
@@ -47,7 +48,12 @@ const Payments = ({data}) => {
             redirect: "follow"
         })
         .then(res => res.json())
-        .then(data => console.log("Else",data))
+        .then(data => {
+            setReady(true)
+            setTimeout(function(){
+                setReady(false)
+            }, 3000)
+        })
     }
 
     return (
@@ -83,6 +89,9 @@ const Payments = ({data}) => {
                     <div className="about__cta">
                         <button className="btn btn--primary" onClick={saveHandler}>Save</button>
                         <DangerButton>Cancel</DangerButton>
+                    </div>
+                    <div className="about__success" style={{opacity: `${ready? "1": "0"}`}}>
+                        <p>Updated Successfully</p>
                     </div>
                 </div>
             </div>

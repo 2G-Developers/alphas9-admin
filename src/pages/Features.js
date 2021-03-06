@@ -9,6 +9,7 @@ const Features = ({data}) => {
     const [listvalue, setListvalue] = useState("")
     const [listClassvalue, setListClassvalue] = useState("")
     const [list, setList] = useState(data?.value?.icon)
+    const [ready, setReady] = useState(false)
 
     const addList = () => {
         setList(oldList => [...oldList, {value:listvalue,className: listClassvalue}])
@@ -41,7 +42,12 @@ const Features = ({data}) => {
             redirect: "follow"
         })
         .then(res => res.json())
-        .then(data => console.log("Else",data))
+        .then(data => {
+            setReady(true)
+            setTimeout(function(){
+                setReady(false)
+            }, 3000)
+        })
     }
 
     return (
@@ -62,6 +68,9 @@ const Features = ({data}) => {
                         <p>For svg link, use font awesome link and copy class name and paste above input box <a href="https://fontawesome.com/v4.7.0/icons/">Font Awesome</a></p>
                         <button className="btn btn--primary" onClick={saveHandler}>Save</button>
                         <DangerButton>Cancel</DangerButton>
+                    </div>
+                    <div className="about__success" style={{opacity: `${ready? "1": "0"}`}}>
+                        <p>Updated Successfully</p>
                     </div>
                 </div>
             </div>

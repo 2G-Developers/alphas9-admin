@@ -9,6 +9,7 @@ const Gallery = ({data}) => {
     const [subheading, setSubHeading] = useState(data?.value?.subheader[0])
     const [file, setFile] = useState("")
     const [filepath, setFilePath] = useState(data?.value?.images)
+    const [ready, setReady] = useState(false)
 
     const saveHandler = () => {
         
@@ -50,7 +51,12 @@ const Gallery = ({data}) => {
                     body: JSON.stringify(sectionData),
                     redirect: "follow"
                 }).then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    setReady(true)
+                    setTimeout(function(){
+                        setReady(false)
+                    }, 3000)
+                })
             })
         } else {
             const sectionData = {
@@ -66,7 +72,12 @@ const Gallery = ({data}) => {
                 redirect: "follow"
             })
             .then(res => res.json())
-            .then(data => console.log("Else",data))
+            .then(data => {
+                setReady(true)
+                setTimeout(function(){
+                    setReady(false)
+                }, 3000)
+            })
         }
 
     }
@@ -92,7 +103,10 @@ const Gallery = ({data}) => {
                     <div className="about__cta">
                         <button className="btn btn--primary" onClick={saveHandler}>Save</button>
                         <DangerButton>Cancel</DangerButton>
-                    </div>                  
+                    </div>   
+                    <div className="about__success" style={{opacity: `${ready? "1": "0"}`}}>
+                        <p>Updated Successfully</p>
+                    </div>               
                 </div>
             </div>
         </section>

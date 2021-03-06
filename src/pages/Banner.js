@@ -13,6 +13,7 @@ const Banner = ({data}) => {
     const [filepath, setFilePath] = useState(data?.value?.image[0])
     const [founderFile, setFounderFile] = useState("")
     const [founderfilepath, setFounderFilePath] = useState(data?.value?.founderimg[0])
+    const [ready, setReady] = useState(false)
 
     const saveHandler = () => {
         const imageData = new FormData();
@@ -65,7 +66,12 @@ const Banner = ({data}) => {
                     body: JSON.stringify(sectionData),
                     redirect: "follow"
                 }).then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    setReady(true)
+                    setTimeout(function(){
+                        setReady(false)
+                    }, 3000)
+                })
             })
         } else {
             if(file) {
@@ -96,7 +102,12 @@ const Banner = ({data}) => {
                         body: JSON.stringify(sectionData),
                         redirect: "follow"
                     }).then(res => res.json())
-                    .then(data => console.log(data))
+                    .then(data => {
+                        setReady(true)
+                        setTimeout(function(){
+                            setReady(false)
+                        }, 3000)
+                    })
 
                 })
             } else if(founderFile) {
@@ -127,7 +138,12 @@ const Banner = ({data}) => {
                         body: JSON.stringify(sectionData),
                         redirect: "follow"
                     }).then(res => res.json())
-                    .then(data => console.log(data))
+                    .then(data => {
+                        setReady(true)
+                        setTimeout(function(){
+                            setReady(false)
+                        }, 3000)
+                    })
 
                 })
             } else {
@@ -146,7 +162,12 @@ const Banner = ({data}) => {
                     body: JSON.stringify(sectionData),
                     redirect: "follow"
                 }).then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    setReady(true)
+                    setTimeout(function(){
+                        setReady(false)
+                    }, 3000)
+                })
             }
         }
     }
@@ -180,6 +201,9 @@ const Banner = ({data}) => {
                     <div className="about__cta">
                         <button className="btn btn--primary" onClick={saveHandler}>Save</button>
                         <DangerButton>Cancel</DangerButton>
+                    </div>
+                    <div className="about__success" style={{opacity: `${ready? "1": "0"}`}}>
+                        <p>Updated Successfully</p>
                     </div>
                 </div>
             </div>

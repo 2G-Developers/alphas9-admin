@@ -12,6 +12,7 @@ const Contact = ({data}) => {
     const [whatsapp, setWhatsapp] = useState(data?.value?.whatsapp[0])
     const [address, setAddress] = useState(data?.value?.maplocation[0])
     const [map, setMap] = useState(data?.value?.mapurl[0])
+    const [ready, setReady] = useState(false)
 
     const saveHandler = () => {
         const postHeaders = new Headers()
@@ -34,7 +35,12 @@ const Contact = ({data}) => {
             redirect: "follow"
         })
         .then(res => res.json())
-        .then(data => console.log("Else",data))
+        .then(data => {
+            setReady(true)
+            setTimeout(function(){
+                setReady(false)
+            }, 3000)
+        })
     }
 
     return (
@@ -68,6 +74,9 @@ const Contact = ({data}) => {
                     <div className="about__cta">
                         <button className="btn btn--primary" onClick={saveHandler}>Save</button>
                         <DangerButton>Cancel</DangerButton>
+                    </div>
+                    <div className="about__success" style={{opacity: `${ready? "1": "0"}`}}>
+                        <p>Updated Successfully</p>
                     </div>
                 </div>
             </div>
