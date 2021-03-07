@@ -16,7 +16,7 @@ const Videos = ({data}) => {
 
         const sectionData = {
             "heading": JSON.stringify([heading]),
-            "videos": JSON.stringify([encodeURIComponent(video)]),
+            "videos": JSON.stringify([video]),
         }
 
         fetch(`${BASE_URL}/update/all/${window.location.pathname.split("/")[1]}/${id}/`, {
